@@ -1,0 +1,5 @@
+aiohttp~=3.7.3
+environs~=9.3.0
+pymyq~=2.0.12
+pytest~=6.2.1
+pytest-mock~=3.4.0

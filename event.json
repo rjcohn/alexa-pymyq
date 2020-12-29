@@ -1,0 +1,17 @@
+{
+    "version": "1.0",
+    "request": {
+        "type": "to be set",
+        "requestId": "amzn1.echo-api.request.1",
+        "timestamp": "2016-10-27T18:21:44Z",
+        "locale": "en-US"
+    },
+    "session": {
+        "new": true,
+        "sessionId": "session",
+        "application": {
+            "applicationId": "amzn1.ask.skill.fca3bd79-8dfc-4a86-aa3b-1df857d5d315"
+        }
+    },
+    "context": {}
+}

@@ -1,0 +1,4 @@
+.env
+*.zip
+.python-version
+/.idea/

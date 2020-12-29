@@ -1,0 +1,189 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "garage",
+            "intents": [
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "StateIntent",
+                    "slots": [
+                        {
+                            "name": "Name",
+                            "type": "DoorName"
+                        },
+                        {
+                            "name": "State",
+                            "type": "DoorState"
+                        }
+                    ],
+                    "samples": [
+                        "if the {Name} is {State}",
+                        "{Name} if it's {State}"
+                    ]
+                },
+                {
+                    "name": "AllStatesIntent",
+                    "slots": [
+                        {
+                            "name": "State",
+                            "type": "DoorState"
+                        }
+                    ],
+                    "samples": [
+                        "what's up",
+                        "if the doors are {State}",
+                        "if either door is {State}"
+                    ]
+                },
+                {
+                    "name": "MoveIntent",
+                    "slots": [
+                        {
+                            "name": "Name",
+                            "type": "DoorName"
+                        },
+                        {
+                            "name": "Command",
+                            "type": "DoorCommand"
+                        }
+                    ],
+                    "samples": [
+                        "{Command} {Name}",
+                        "to {Command} {Name}",
+                        "{Name} to {Command}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "DoorName",
+                    "values": [
+                        {
+                            "id": "1",
+                            "name": {
+                                "value": "1",
+                                "synonyms": [
+                                    "door",
+                                    "door 1"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "2",
+                            "name": {
+                                "value": "2",
+                                "synonyms": [
+                                    "door 2"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "left",
+                            "name": {
+                                "value": "left",
+                                "synonyms": [
+                                    "left door",
+                                    "the left door"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "right",
+                            "name": {
+                                "value": "right",
+                                "synonyms": [
+                                    "right door",
+                                    "the right door"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "both",
+                            "name": {
+                                "value": "both",
+                                "synonyms": [
+                                    "both doors",
+                                    "all",
+                                    "all doors"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DoorState",
+                    "values": [
+                        {
+                            "id": "open",
+                            "name": {
+                                "value": "open",
+                                "synonyms": [
+                                    "up"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "closed",
+                            "name": {
+                                "value": "closed",
+                                "synonyms": [
+                                    "shut",
+                                    "down"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "opening"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "closing"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DoorCommand",
+                    "values": [
+                        {
+                            "id": "open",
+                            "name": {
+                                "value": "open",
+                                "synonyms": [
+                                    "raise"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "close",
+                            "name": {
+                                "value": "close",
+                                "synonyms": [
+                                    "shut",
+                                    "lower"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
