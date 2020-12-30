@@ -22,7 +22,7 @@ The major changes from Alexa-MyQ-WithMultiDoorSupport:
 
 * Move to latest (simplified) Alexa framework.
 * Move to Python 3.
-* Move to [PyMyQ](https://github.com/arraylabs/pymyq>).
+* Move to [PyMyQ](https://github.com/arraylabs/pymyq).
 
 ## Instructions
 
