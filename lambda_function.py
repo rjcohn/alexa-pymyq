@@ -331,7 +331,7 @@ class GarageRequestHandler:
             'card': {
                 'type': 'Simple',
                 'title': f'MyQ - {title}',
-                'content': f'MyQ - {output}'
+                'content': output
             },
             'reprompt': {
                 'outputSpeech': {
