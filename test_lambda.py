@@ -94,7 +94,7 @@ def test_only_close(event, mocker):
 
 def test_open(event, mocker):
     if MOCK_MYQ_COMMANDS:
-        mocker.patch('pymyq.device.MyQDevice.open')
+        mocker.patch('pymyq.garagedoor.MyQGaragedoor.open')
     event['request']['type'] = 'IntentRequest'
     event['request']['intent'] = {'name': 'MoveIntent',
                                   'slots': {
@@ -108,7 +108,7 @@ def test_open(event, mocker):
 # WARNING: this will close the actual door if it is open
 def test_close(event, mocker):
     if MOCK_MYQ_COMMANDS:
-        mocker.patch('pymyq.device.MyQDevice.close')
+        mocker.patch('pymyq.garagedoor.MyQGaragedoor.close')
     event['request']['type'] = 'IntentRequest'
     event['request']['intent'] = {'name': 'MoveIntent',
                                   'slots': {
@@ -122,7 +122,7 @@ def test_close(event, mocker):
 # WARNING: this will close the actual doors if they are open, but test assumes they are closed
 def test_close_all(event, mocker):
     if MOCK_MYQ_COMMANDS:
-        mocker.patch('pymyq.device.MyQDevice.close')
+        mocker.patch('pymyq.garagedoor.MyQGaragedoor.close')
     event['request']['type'] = 'IntentRequest'
     event['request']['intent'] = {'name': 'MoveIntent',
                                   'slots': {
