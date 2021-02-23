@@ -1,5 +1,6 @@
 # Recent Updates
 
+* 23 Feb 2021: Update to PyMyQ 3.0.4
 * 13 Jan 2021: Update to PyMyQ 2.0.14 to fix API issues
 * 29 Dec 2020: Created based on https://github.com/tigerbrain/Alexa-MyQ-WithMultiDoorSupport.
 
