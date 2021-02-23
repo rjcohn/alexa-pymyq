@@ -1,19 +1,25 @@
-"""AWS Lambda function to support an Alexa skill that opens and closes one or two garage doors."""
+"""AWS Lambda function to support an Alexa skill that opens and closes one or two garage doors.
+
+Pymyq provides access to the Chamberlain API.
+
+The Alexa interaction model assumes:
+- door states in the API contain all the DoorState values
+- door commands in the API contain the DoorCommand values
+
+See https://github.com/arraylabs/pymyq/blob/master/pymyq/device.py
+"""
 
 import asyncio
 import logging
+from typing import TYPE_CHECKING
 
-# pymyq provides access to the Chamberlain API
-# the Alexa interaction model assumes:
-# - door states in the API contain all the DoorState values
-# - door commands in the API contain the DoorCommand values
-# see https://github.com/arraylabs/pymyq/blob/master/pymyq/device.py
 import pymyq
-
 from aiohttp import ClientSession
 from environs import Env
 from pymyq.api import API
-from pymyq.device import MyQDevice
+
+if TYPE_CHECKING:
+    from pymyq.garagedoor import MyQGaragedoor
 
 # load system env vars and read .env (set override=True for .env values to override existing vars)
 env = Env()
@@ -78,7 +84,7 @@ class GarageRequestHandler:
     def has_one_door(self):
         return len(self.myq.covers) == 1
 
-    def get_door(self, device_ind: int) -> MyQDevice:
+    def get_door(self, device_ind: int) -> 'MyQGaragedoor':
         return list(self.myq.covers.values())[device_ind]
 
     def get_door_index(self, door_name: str) -> int:

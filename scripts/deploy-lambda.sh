@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Create zip file with lambda code and deploy
+# (requires AWS credentials in environment or ~/.aws/credentials)
+
 set -e
 
 SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
