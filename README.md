@@ -161,7 +161,7 @@ and choose "Alexa Developer Console".
     
 16. Click Test at the top.
 
-    * Change the pulldown value form Off to Development.
+    * Change the pulldown value from Off to Development.
     
 7. Congratulations!  You are now ready to test your skill by giving Alexa the
     commands below:
