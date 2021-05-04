@@ -1,6 +1,7 @@
 # Recent Updates
 
-* 22 Apr 2021: Revert to old instructions that support Pythone 3.8 (required by 23 Feb 2021: Update to PyMyQ 3.0.4
+* 22 Apr 2021: Revert to old instructions that support Pythone 3.8 (required by PyMyQ 3.0.4)
+* 23 Feb 2021: Update to PyMyQ 3.0.4
 * 13 Jan 2021: Update to PyMyQ 2.0.14 to fix API issues
 * 29 Dec 2020: Created based on https://github.com/tigerbrain/Alexa-MyQ-WithMultiDoorSupport.
 
