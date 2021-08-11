@@ -1,4 +1,5 @@
 .env
 *.zip
+!lambda-upload.zip
 .python-version
 /.idea/

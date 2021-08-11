@@ -1,6 +1,7 @@
 # Recent Updates
 
-* 22 Apr 2021: Revert to old instructions that support Pythone 3.8 (required by PyMyQ 3.0.4)
+* 10 Aug 2021: Update to PyMyQ 3.1.1
+* 22 Apr 2021: Revert to old instructions that support Python 3.8 (required by PyMyQ 3.0.4)
 * 23 Feb 2021: Update to PyMyQ 3.0.4
 * 13 Jan 2021: Update to PyMyQ 2.0.14 to fix API issues
 * 29 Dec 2020: Created based on https://github.com/tigerbrain/Alexa-MyQ-WithMultiDoorSupport.
@@ -198,7 +199,7 @@ Viewing the skill logs can usually tell you what's gone wrong.
 Go to the Alexa Developer Console, click the Code tab and then click the Logs icon.
 This takes you to CloudWatch, where you can check the logs  with the most recent
 one at the top of the list.
-For more detailed logging, add `LOG_LEVEL=DEBUG to the environment variables and redeploy.
+For more detailed logging, add `LOG_LEVEL=DEBUG` to the environment variables and redeploy.
 The most common problem is that Chamberlain makes an incompatible change to their server.
 Look for an update to this code or possibly to [PyMyQ](https://github.com/arraylabs/pymyq>)
 if this is the problem.
@@ -214,11 +215,27 @@ You can say or enter commands there:
 * ask my garage what's up
 * ask my garage to close the left door
 
-### Alexa Skills Kit Documentation
+# Updating Alexa-PyMyQ
+
+If you make a change to the source here or get an update from git,
+you will need to update one or more components using the instructions above.
+If you change lambda_function.py or any dependencies in requirements.txt,
+you need to rebuild lambda-upload.zip. Run `scripts/create-lambda-old.sh`.
+
+If you rebuild lambda-upload.zip or change a JSON file such as interaction_model.json or one of the test 
+events,
+reload them through the Alexa console following the instructions above.
+
+If you do change anything, you may want to run tests (this assumes you have created a virtualenv):
+
+`pytest test_lambda.py`
+
+# Alexa Skills Kit Documentation
+
 The documentation for the Alexa Skills Kit is available on the
 [Amazon Alexa Portal](https://developer.amazon.com/en-US/alexa).
 
-### Disclaimer
+# Disclaimer
 
 The code here is based off of an unsupported API from [Chamberlain](http://www.chamberlain.com/)
 and is subject to change without notice.
