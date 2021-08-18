@@ -1,12 +1,12 @@
 # Recent Updates
 
-* 10 Aug 2021: Revert to PyMyQ 3.0.4 to avoid errors on open and close
+* 18 Aug 2021: 1.0.5 Revert to PyMyQ 3.0.4 to avoid errors on open and close
   ([Issue 20](https://github.com/rjcohn/alexa-pymyq/issues/20))
-* 10 Aug 2021: Update to PyMyQ 3.1.1
-* 22 Apr 2021: Revert to old instructions that support Python 3.8 (required by PyMyQ 3.0.4)
-* 23 Feb 2021: Update to PyMyQ 3.0.4
-* 13 Jan 2021: Update to PyMyQ 2.0.14 to fix API issues
-* 29 Dec 2020: Created based on https://github.com/tigerbrain/Alexa-MyQ-WithMultiDoorSupport.
+* 10 Aug 2021: 1.0.4 Update to PyMyQ 3.1.1
+* 22 Apr 2021: 1.0.3 Revert to old instructions that support Python 3.8 (required by PyMyQ 3.0.4)
+* 23 Feb 2021: 1.0.2 Update to PyMyQ 3.0.4
+* 13 Jan 2021: 1.0.1 Update to PyMyQ 2.0.14 to fix API issues
+* 29 Dec 2020: 1.0.0 Created based on https://github.com/tigerbrain/Alexa-MyQ-WithMultiDoorSupport.
 
 --------------------------------------
 
@@ -206,7 +206,7 @@ The most common problem is that Chamberlain makes an incompatible change to thei
 Look for an update to this code or possibly to [PyMyQ](https://github.com/arraylabs/pymyq>)
 if this is the problem.
 
-To see logs, go to your lambda function in the AWS Console and click Monitor.
+To see lambda logs, go to your lambda function in the AWS Console and click Monitor.
 From there, you can look at CloudWatch metrocis or go directly to the logs.
 
 You can also go to Alexa console and test commands by clicking on the Test tab.
@@ -222,11 +222,18 @@ You can say or enter commands there:
 If you make a change to the source here or get an update from git,
 you will need to update one or more components using the instructions above.
 
-If you change lambda_function.py or any dependencies in requirements.txt,
-you'll need to update the lambda function in the AWS Console.
-If you _only_ change lambda_function.py, you can just replace lambda_function.py
+New releases usually include a new upload-lambda.zip.
+To deploy it, go to your lambda function in the AWS Console and upload the zip file,
+following the instructions above.
+If you want to verify that the new zip has successfully deployed,
+test a command such as "What's up?" on your Alexa device.
+Then click the Monitor tab in the AWS Console and click "View logs in CloudWatch".
+Click on the latest log stream (you may have to click the refresh button to see it).
+The first line of the logs for your command should include "Alexa-PyMyQ" followed by the version number.
+
+If you change lambda_function.py yourself, you can just replace lambda_function.py
 itself on the Code tab and click Deploy.
-If the requirements have changed,
+If you change the requirements,
 you need to rebuild lambda-upload.zip. Run `scripts/create-lambda-old.sh`.
 Then upload the zip file as described above.
 

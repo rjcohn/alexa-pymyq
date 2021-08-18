@@ -21,6 +21,8 @@ from pymyq.api import API
 if TYPE_CHECKING:
     from pymyq.garagedoor import MyQGaragedoor
 
+VERSION = '1.0.5'
+
 # load system env vars and read .env (set override=True for .env values to override existing vars)
 env = Env()
 env.read_env(override=False)
@@ -407,6 +409,7 @@ class GarageRequestHandler:
 
 
 def lambda_handler(event: dict, _context=None) -> dict:
+    logger.info(f'Alexa-PyMyQ {VERSION}')
     logger.debug(f'Event: {event}')
     handler = GarageRequestHandler()
     return asyncio.get_event_loop().run_until_complete(handler.process(event))
