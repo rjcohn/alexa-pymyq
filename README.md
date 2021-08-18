@@ -1,5 +1,7 @@
 # Recent Updates
 
+* 10 Aug 2021: Revert to PyMyQ 3.0.4 to avoid errors on open and close
+  ([Issue 20](https://github.com/rjcohn/alexa-pymyq/issues/20))
 * 10 Aug 2021: Update to PyMyQ 3.1.1
 * 22 Apr 2021: Revert to old instructions that support Python 3.8 (required by PyMyQ 3.0.4)
 * 23 Feb 2021: Update to PyMyQ 3.0.4
@@ -219,14 +221,20 @@ You can say or enter commands there:
 
 If you make a change to the source here or get an update from git,
 you will need to update one or more components using the instructions above.
+
 If you change lambda_function.py or any dependencies in requirements.txt,
+you'll need to update the lambda function in the AWS Console.
+If you _only_ change lambda_function.py, you can just replace lambda_function.py
+itself on the Code tab and click Deploy.
+If the requirements have changed,
 you need to rebuild lambda-upload.zip. Run `scripts/create-lambda-old.sh`.
+Then upload the zip file as described above.
 
-If you rebuild lambda-upload.zip or change a JSON file such as interaction_model.json or one of the test 
-events,
-reload them through the Alexa console following the instructions above.
+If you change interaction_model.json,
+reload it through the Alexa console following the instructions above.
 
-If you do change anything, you may want to run tests (this assumes you have created a virtualenv):
+If you do change anything, you may want to run tests locally first
+(this assumes you have created a virtualenv):
 
 `pytest test_lambda.py`
 

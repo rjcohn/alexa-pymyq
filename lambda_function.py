@@ -29,6 +29,11 @@ logger = logging.getLogger()
 logger.setLevel(env.log_level('LOG_LEVEL', logging.INFO))
 
 
+class InputException(Exception):
+    """Signifies input that was not understood"""
+    pass
+
+
 class GarageRequestHandler:
     """Handle a request by the garage skill"""
 
@@ -79,7 +84,14 @@ class GarageRequestHandler:
     # 5882651c-6377-4bc7-bfd7-0fd661d95abc/entity-resolution-in-skill-builder
     @staticmethod
     def slot_value_id(intent, slot):
-        return intent['slots'][slot]['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['id']
+        try:
+            return intent['slots'][slot]['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['id']
+        except KeyError as e:
+            # if the input couldn't be parsed, there will be no values
+            if str(e) == "'values'":
+                raise InputException(slot) from None
+            else:
+                raise
 
     def has_one_door(self):
         return len(self.myq.covers) == 1
@@ -167,7 +179,6 @@ class GarageRequestHandler:
         failure_msg = f"I didn't understand that. You can say {self.move_msg}."
         reprompt_msg = f'Ask me to {self.move_msg}.'
 
-        # noinspection PyBroadException
         try:
             door_name = intent['slots']['Name']['value']
             door_name_id = self.slot_value_id(intent, 'Name')
@@ -202,7 +213,7 @@ class GarageRequestHandler:
 
             return self.build_speechlet_response(card_title, speech_output)
 
-        except Exception:
+        except InputException:
             logger.exception(f'Error executing {intent}')
             return self.build_speechlet_response('Try again', failure_msg, reprompt_msg)
 
@@ -273,7 +284,6 @@ class GarageRequestHandler:
         failure_msg = f"I didn't understand that. You can {self.check1_msg}."
         reprompt_msg = f'Ask me to {self.check1_msg}.'
 
-        # noinspection PyBroadException
         try:
             door_name = intent['slots']['Name']['value']
             door_name_id = self.slot_value_id(intent, 'Name')
@@ -293,7 +303,7 @@ class GarageRequestHandler:
 
             return self.build_speechlet_response(card_title, speech_output)
 
-        except Exception:
+        except InputException:
             logger.exception(f'Error executing {intent}')
             return self.build_speechlet_response('Try again', failure_msg, reprompt_msg)
 
@@ -356,31 +366,41 @@ class GarageRequestHandler:
             'response': speechlet_response
         }
 
+    async def process_with_session(self, event: dict, http_session: ClientSession) -> dict:
+        """Process the event and return a speechlet"""
+        self.myq = await pymyq.login(self.user_name, self.password, http_session)
+
+        if self.has_one_door():
+            self.move_msg = self.move_msg.replace(' left or right', '')
+            self.check_msg = self.check1_msg = self.check1_msg.replace(' left or right', '')
+
+        if event['session']['new']:
+            logger.info(f"New session: request_id={event['request']['requestId']}, " 
+                        f"sessionId={event['session']['sessionId']}")
+
+        request_type = event['request']['type']
+        if request_type == 'LaunchRequest':
+            return self.on_launch()
+        elif request_type == 'IntentRequest':
+            return await self.on_intent(event['request']['intent'])
+        elif request_type == 'SessionEndedRequest':
+            return self.on_session_ended()
+        else:
+            logger.error(f'Unknown request type: {request_type}')
+            raise InputException(request_type)
+
+    # noinspection PyBroadException
     async def process(self, event: dict) -> dict:
         """Create the aiohttp session and run"""
-        async with ClientSession() as http_session:
-            self.myq = await pymyq.login(self.user_name, self.password, http_session)
+        try:
+            async with ClientSession() as http_session:
+                speechlet = await self.process_with_session(event, http_session)
+        except Exception:
+            logger.exception(f'Error executing {event}')
+            speechlet = self.build_speechlet_response('Try again', 'Sorry. There was an error processing your request')
 
-            # Not using sessions for now
-            session_attributes = {}
-
-            if self.has_one_door():
-                self.move_msg = self.move_msg.replace(' left or right', '')
-                self.check_msg = self.check1_msg = self.check1_msg.replace(' left or right', '')
-
-            if event['session']['new']:
-                logger.info(f"New session: request_id={event['request']['requestId']}, " 
-                            f"sessionId={event['session']['sessionId']}")
-
-            request_type = event['request']['type']
-            if request_type == 'LaunchRequest':
-                speechlet = self.on_launch()
-            elif request_type == 'IntentRequest':
-                speechlet = await self.on_intent(event['request']['intent'])
-            elif request_type == 'SessionEndedRequest':
-                speechlet = self.on_session_ended()
-            else:
-                raise Exception(f'Unknown request type: {request_type}')
+        # Not using sessions for now
+        session_attributes = {}
 
         # Return a response for speech output
         return self.build_response(session_attributes, speechlet)
