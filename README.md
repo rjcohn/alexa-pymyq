@@ -1,5 +1,6 @@
 # Recent Updates
 
+* 13 Aug 2023: 1.0.6 Allow RIGHT door to be any value, not just (1 - LEFT) 
 * 18 Aug 2021: 1.0.5 Revert to PyMyQ 3.0.4 to avoid errors on open and close
   ([Issue 20](https://github.com/rjcohn/alexa-pymyq/issues/20))
 * 10 Aug 2021: 1.0.4 Update to PyMyQ 3.1.1

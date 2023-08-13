@@ -8,7 +8,7 @@ from lambda_function import lambda_handler
 
 # Tests assume there are two doors and both are closed
 
-# Set this to false to test open/close commands
+# Set MOCK_MYQ_COMMANDS to False in order to test open/close commands
 # Even when true, tests will still authenticate and get current state
 MOCK_MYQ_COMMANDS = True
 

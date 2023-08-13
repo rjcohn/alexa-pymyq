@@ -21,7 +21,7 @@ from pymyq.api import API
 if TYPE_CHECKING:
     from pymyq.garagedoor import MyQGaragedoor
 
-VERSION = '1.0.5'
+VERSION = '1.0.6'
 
 # load system env vars and read .env (set override=True for .env values to override existing vars)
 env = Env()
@@ -75,7 +75,7 @@ class GarageRequestHandler:
             errors.append('PASSWORD environment variable needs to be set to your MyQ password')
 
         self.left_door = env.int('LEFT', 0)
-        self.right_door = 1 - self.left_door
+        self.right_door = env.int('RIGHT', 1 - self.left_door)
 
         self.only_close = env.bool('ONLY_CLOSE', True)
 
