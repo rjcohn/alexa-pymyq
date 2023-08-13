@@ -167,7 +167,7 @@ and choose "Alexa Developer Console".
 
     * Change the pulldown value from Off to Development.
     
-7. Congratulations!  You are now ready to test your skill by giving Alexa the
+17. Congratulations!  You are now ready to test your skill by giving Alexa the
     commands below:
 
     Assuming that your skill invocation name is "my garage"
@@ -192,6 +192,12 @@ and choose "Alexa Developer Console".
         "Alexa, ask MY GARAGE LEFT to close"
         OR
         "Alexa, ask MY GARAGE if RIGHT is open"
+
+18. You can simplify the commands using
+    [Alexa routines](https://www.amazon.com/gp/help/customer/display.html?nodeId=G2PYLKJN3XVZ55EQ).
+    Routines enable you to say "Alexa, open the left garage door" instead of
+    "Alexa, ask my garage to open the left door". You can choose a default door so that even with two doors
+    you can say "Alexa, open the garage door" or "Alexa, close the garage door".
 
 ## Troubleshooting Tips
 
