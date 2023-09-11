@@ -147,8 +147,15 @@ and choose "Alexa Developer Console".
 
     If the test succeeds, you should see "Execution result: succeeded (logs)" again.
     The log output should show your actual door state (open or closed).
-    If the test fails, make sure you have set up the environment variables correctly.
     
+    If the test fails, make sure you have set up the environment variables correctly.
+    On failure, click on the Details disclosure triangle to see the log output.
+    Even the HelpIntent test authenticates the user, so if it fails, likely either
+    your credentials are incorrect or the MyQ server is down or refusing requests.
+    The PyMyQ library automatically retries on a failed API call, 
+    but the Lambda function will time out after one retry.
+    API failures will often result in a timeout, but log messages should provide more information.
+
 13. In the Function overview, copy the Function ARN by clicking the Copy icon.
 
 14. Return to your Amazon developer account >> Alexa >> Alexa Skills Kit project and
