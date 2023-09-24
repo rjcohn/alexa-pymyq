@@ -1,3 +1,8 @@
+> [!WARNING]
+> Since September 9, 2023, the Alexa skill is no longer working due to a problem accessing the Chamberlain API from AWS (which the skill requires).
+> If it is fixable, it will require a change in pymyq.
+> See https://github.com/arraylabs/pymyq/issues/185.
+
 # Recent Updates
 
 * 13 Aug 2023: 1.0.6 Allow RIGHT door to be any value, not just (1 - LEFT) 
